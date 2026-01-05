@@ -1,20 +1,16 @@
-use std::fs;
+use crate::inputs;
 
 pub fn part_1() -> u32 {
-    let contents =
-        fs::read_to_string("inputs/day_1.txt").expect("Should have been able to read the file");
-    let (l, r) = parse_input(&contents);
+    let (l, r) = inputs::parse_input_for_day(1, parse_input);
     compute_distance(l, r)
 }
 
 pub fn part_2() -> u32 {
-    let contents =
-        fs::read_to_string("inputs/day_1.txt").expect("Should have been able to read the file");
-    let (l, r) = parse_input(&contents);
+    let (l, r) = inputs::parse_input_for_day(1, parse_input);
     compute_similarity(l, r)
 }
 
-fn parse_input(input: &str) -> (Vec<u32>, Vec<u32>) {
+fn parse_input(input: String) -> (Vec<u32>, Vec<u32>) {
     let mut l: Vec<u32> = Vec::new();
     let mut r: Vec<u32> = Vec::new();
 

@@ -1,4 +1,6 @@
 mod day_1;
+mod inputs;
+
 use ferris_says::say;
 use std::io::{BufWriter, stdout};
 
