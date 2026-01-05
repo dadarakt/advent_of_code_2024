@@ -63,20 +63,20 @@ mod tests {
 
     #[test]
     fn parse_input_test() {
-        let (l, r) = parse_input(TEST_INPUT);
+        let (l, r) = parse_input(String::from(TEST_INPUT));
         assert_eq!(l.len(), r.len());
     }
 
     #[test]
     fn distance_test() {
-        let (l, r) = parse_input(TEST_INPUT);
+        let (l, r) = parse_input(String::from(TEST_INPUT));
         let sum = compute_distance(l, r);
         assert_eq!(11, sum);
     }
 
     #[test]
     fn similarity_test() {
-        let (l, r) = parse_input(TEST_INPUT);
+        let (l, r) = parse_input(String::from(TEST_INPUT));
         let sum = compute_similarity(l, r);
         assert_eq!(31, sum);
     }
