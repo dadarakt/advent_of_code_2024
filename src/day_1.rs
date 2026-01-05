@@ -7,6 +7,13 @@ pub fn part_1() -> u32 {
     compute_distance(l, r)
 }
 
+pub fn part_2() -> u32 {
+    let contents =
+        fs::read_to_string("inputs/day_1.txt").expect("Should have been able to read the file");
+    let (l, r) = parse_input(&contents);
+    compute_similarity(l, r)
+}
+
 fn parse_input(input: &str) -> (Vec<u32>, Vec<u32>) {
     let mut l: Vec<u32> = Vec::new();
     let mut r: Vec<u32> = Vec::new();
@@ -28,6 +35,22 @@ fn compute_distance(l: Vec<u32>, r: Vec<u32>) -> u32 {
     for i in 0..(l.len()) {
         sum += l[i].abs_diff(r[i]);
     }
+    sum
+}
+
+fn compute_similarity(l: Vec<u32>, r: Vec<u32>) -> u32 {
+    let mut sum: u32 = 0;
+    let mut right_sum = 0;
+    l.iter().for_each(|v| {
+        right_sum = 0;
+        r.iter().for_each(|r_val| {
+            if r_val == v {
+                right_sum += 1;
+            }
+        });
+        sum += v * right_sum;
+    });
+
     sum
 }
 
@@ -53,5 +76,12 @@ mod tests {
         let (l, r) = parse_input(TEST_INPUT);
         let sum = compute_distance(l, r);
         assert_eq!(11, sum);
+    }
+
+    #[test]
+    fn similarity_test() {
+        let (l, r) = parse_input(TEST_INPUT);
+        let sum = compute_similarity(l, r);
+        assert_eq!(31, sum);
     }
 }
