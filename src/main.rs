@@ -1,4 +1,5 @@
 mod day_1;
+mod day_2;
 mod inputs;
 
 use ferris_says::say;
@@ -21,6 +22,7 @@ fn main() {
 fn run_day(day: u32) -> String {
     match day {
         1 => day_1::run(),
+        2 => day_2::run(),
         _ => unimplemented!(),
     }
 }
