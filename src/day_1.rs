@@ -1,22 +1,13 @@
 use crate::inputs;
 
 pub fn run() -> String {
-    let distance = part_1();
-    let similarity = part_2();
+    let (l, r) = inputs::parse_input_for_day(1, parse_input);
+    let distance = compute_distance(&l, &r);
+    let similarity = compute_similarity(&l, &r);
     format!(
         "The distance is {}, and the similarity is {}",
         distance, similarity
     )
-}
-
-fn part_1() -> u32 {
-    let (l, r) = inputs::parse_input_for_day(1, parse_input);
-    compute_distance(l, r)
-}
-
-fn part_2() -> u32 {
-    let (l, r) = inputs::parse_input_for_day(1, parse_input);
-    compute_similarity(l, r)
 }
 
 fn parse_input(input: String) -> (Vec<u32>, Vec<u32>) {
@@ -35,7 +26,7 @@ fn parse_input(input: String) -> (Vec<u32>, Vec<u32>) {
     (l, r)
 }
 
-fn compute_distance(l: Vec<u32>, r: Vec<u32>) -> u32 {
+fn compute_distance(l: &[u32], r: &[u32]) -> u32 {
     let mut sum = 0;
     for i in 0..(l.len()) {
         sum += l[i].abs_diff(r[i]);
@@ -43,7 +34,7 @@ fn compute_distance(l: Vec<u32>, r: Vec<u32>) -> u32 {
     sum
 }
 
-fn compute_similarity(l: Vec<u32>, r: Vec<u32>) -> u32 {
+fn compute_similarity(l: &[u32], r: &[u32]) -> u32 {
     let mut sum = 0;
     let mut right_sum = 0;
     l.iter().for_each(|v| {
@@ -79,14 +70,14 @@ mod tests {
     #[test]
     fn distance_test() {
         let (l, r) = parse_input(String::from(TEST_INPUT));
-        let sum = compute_distance(l, r);
+        let sum = compute_distance(&l, &r);
         assert_eq!(11, sum);
     }
 
     #[test]
     fn similarity_test() {
         let (l, r) = parse_input(String::from(TEST_INPUT));
-        let sum = compute_similarity(l, r);
+        let sum = compute_similarity(&l, &r);
         assert_eq!(31, sum);
     }
 }
